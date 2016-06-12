@@ -137,8 +137,8 @@
 		A2A8FA871AFA43DD0087DD68 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				A2A8FA881AFA43E10087DD68 /* DragOutlineView.m */,
 				A2A8FA891AFA43E10087DD68 /* DragOutlineView.h */,
+				A2A8FA881AFA43E10087DD68 /* DragOutlineView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";

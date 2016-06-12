@@ -48,17 +48,19 @@
     
     NSMutableDictionary *provisions = [NSMutableDictionary dictionary];
     for(NSString *fileName in _profileNames){
-        [_profilePaths addObject:[_profileDir stringByAppendingString:fileName?:@""]];
-        NSMutableDictionary *dic = (NSMutableDictionary*)[self readPlist:[_profileDir stringByAppendingString:fileName?:@""]];
-        dic[@"filePath"] = [_profileDir stringByAppendingString:fileName?:@""];
-
-        [_profileDatas addObject:dic];
-        if (dic && fileName) {
+        if (!fileName.length) {
+            continue;
+        }
+        NSString *tmpFilePath = [_profileDir stringByAppendingString:fileName];
+        [_profilePaths addObject:tmpFilePath];
+        NSMutableDictionary *dic = (NSMutableDictionary*)[self readPlist:tmpFilePath];
+        dic[@"filePath"] = tmpFilePath;
+        
+        if (dic) {
+            [_profileDatas addObject:dic];
             provisions[fileName] = dic;
         }
-        
     }
-    
     
     ProfilesNode *node = [[ProfilesNode alloc]initWithParentNode:nil originInfo:provisions];
     node.key = @"Mobile Provisions";
@@ -240,8 +242,8 @@
         }
     }
 }
-#pragma mark -
-#pragma mark Operation
+#pragma mark - Operation
+
 - (void)deleteItemClick:(id)sender
 {
     
